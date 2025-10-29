@@ -16,13 +16,15 @@ def display():
     glTranslatef(0.0, 0.0, -50)  # Mover la cámara hacia atrás
 
     # Dibujar un triángulo
-    glBegin(GL_TRIANGLES)
+    glBegin(GL_QUADS)
     glColor3f(1.0, 0.0, 0.0)  # Rojo
     glVertex3f(-1.0, -1.0, 0.0)
     glColor3f(0.0, 1.0, 0.0)  # Verde
     glVertex3f(1.0, -1.0, 0.0)
     glColor3f(0.0, 0.0, 1.0)  # Azul
-    glVertex3f(0.0, 1.0, 0.0)
+    glVertex3f(1.0, 1.0, 0.0)
+    glColor3f(1.0, 1.0 , 0.0)
+    glVertex3f(-1.0,1.0,0.0)
     glEnd()
 
     glutSwapBuffers()  # Intercambiar buffers
@@ -32,7 +34,8 @@ def main():
     glutInit(sys.argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
     glutInitWindowSize(800, 600)
-    glutCreateWindow(b'Triangulo con GLUT y Python')
+    glutCreateWindow(b'Triangulo con GLUT y Python') 
+    # En caso de usar el glut para crear la ventanna se deve de formatear el string para que use codificacion en binario o algo asi dice la documentacion
 
     init()
     glutDisplayFunc(display)
