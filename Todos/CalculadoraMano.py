@@ -77,18 +77,17 @@ while True:
     if right_index:
         x, y = right_index
         zona = detectar_zona(x, y)
-        if zona and zona != ultima_zona:
+        if zona and zona != ultima_zona: # Checa que se toco y evita que se repita en los frames
             if zona == "=":
                 try:
                     resultado = eval(operacion)
                     print(f"{operacion} = {resultado}")
                     operacion = str(resultado)
-                except:
+                except: # Reinicia en caso de salir mal
                     print("Error en la operación")
                     operacion = ""
             else:
-                operacion += zona
-                print("Operación actual:", operacion)
+                operacion += zona # Si no se toca el igual se va a sumar el numero/ecuacion o 'Zona' a la operacion 
             ultima_zona = zona
         elif not zona:
             ultima_zona = None  # reinicia si el dedo sale de zona

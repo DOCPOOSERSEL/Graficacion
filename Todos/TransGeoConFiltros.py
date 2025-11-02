@@ -29,7 +29,8 @@ def filtroBilineal (img):
             else:
                 kernel = kernel_x
             
-            # Ajustar kernel al tamaño de vecindad (en bordes)
+            # Ajustar kernel al tamaño de vecindad para evitar un error en bordes o q los tome en cuenta valla
+            # Dandole el valor de el tamaño de la vecindad para que vaya de 0 al valor de esta
             ky, kx = vecindad.shape
             kernel_ajustada = kernel[0:ky, 0:kx]
 
@@ -40,20 +41,50 @@ def filtroBilineal (img):
 
     return img_filtrada            
 
+# Transformaciones chiquitas para ahorrar espacio
+def rotar(img, angulo):
+    h, w = img.shape
+    M = cv.getRotationMatrix2D((w//2, h//2), angulo, 1)
+    return cv.warpAffine(img, M, (w, h))
+
+def escalar(img, fx=1, fy=1):
+    return cv.resize(img, None, fx=fx, fy=fy)
+
+def trasladar(img, dx, dy):
+    h, w = img.shape
+    M = np.float32([[1, 0, dx], [0, 1, dy]])
+    return cv.warpAffine(img, M, (w, h))
+
+
 # Cargar la imagen en escala de grises
 img = cv.imread('Todos\TsuruRojo.jpg', 0)
-# Cordenadas para recorrer la img
+# Cordenadas para mover la img
 h, w = img.shape
 
-img_escalada = cv.resize(img, None, fx=2, fy=2)
-# Se aplica el filtro y se usa el '-1' para que mantenga la misma profundidad que la imagen que fue escalada
-filtrada = filtroBilineal(img)
+# Trans 1
+img1 = escalar(img, 2, 2)
+img1 = rotar(img1, 40)
+img1 = rotar(img1, 45)
+img1_filtrada = filtroBilineal(img1)
 
-# Mostrar la imagen original y la escalada
-cv.imshow('Imagen Original', img)
-cv.imshow('Imagen Escalada', img_escalada)
-cv.imshow('Imagen filtrada', filtrada)
+# Trans 2
+img2 = escalar(img, 2, 2)
+img2 = rotar(img2, 45)
+img2_filtrada = filtroBilineal(img2)
+
+# Trans 3
+dx, dy = w//2, h//2  # trasladar al centro
+img3 = trasladar(img, dx, dy)
+img3 = rotar(img3, 90)
+img3 = escalar(img3, 2, 2)
+img3_filtrada = filtroBilineal(img3)
+
+# Mostrar resultados
+cv.imshow('Imagen 1 Filtrada', img1_filtrada)
+cv.imshow('Imagen 2 Filtrada', img2_filtrada)
+cv.imshow('Imagen 3 Filtrada', img3_filtrada)
 cv.waitKey(0)
 cv.destroyAllWindows()
 
 #Ya va amarrando :)
+# Ya amarroooooooooo siuuuuuu

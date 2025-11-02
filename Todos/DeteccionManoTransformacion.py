@@ -26,15 +26,18 @@ def reconocer_letra(hand_landmarks, frame):
     cv2.putText(frame, f'({int(pulgar[0])}, {int(pulgar[1])})', (pulgar[0], pulgar[1] - 15), 
                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (245, 0, 0), 2, cv2.LINE_AA)
 
+    # El if detecta si hay dos manos
     if results.multi_hand_landmarks and len(results.multi_hand_landmarks) == 2:
+        #Agarra el set de cordenadas de cada mano y la asigna a la variable mano
         mano1 = results.multi_hand_landmarks[0]
         mano2 = results.multi_hand_landmarks[1]
 
-        # Coordenadas de los índices de ambas manos
+        # Coordenadas de los índices de ambas manos para unir los indices
         indice1 = (int(mano1.landmark[8].x * w), int(mano1.landmark[8].y * h))
         indice2 = (int(mano2.landmark[8].x * w), int(mano2.landmark[8].y * h))
 
-        # Dibujar línea entre índices
+        # Dibujar línea entre índices por el momento en lo que me sale el cuadrado
+    
         cv2.line(frame, indice1, indice2, (244,34,12), 2)
 
     

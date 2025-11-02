@@ -22,9 +22,9 @@ def display():
     glColor3f(0.0, 1.0, 0.0)  # Verde
     glVertex3f(-0.5, -1.0, 0.0)
     glColor3f(0.0, 0.0, 1.0)  # Azul
-    glVertex3f(-1.0, 1.0, 0.0)
+    glVertex3f(-0.5, 1.0, 0.0)
     glColor3f(1.0, 1.0 , 0.0)
-    glVertex3f(-0.5,1.0,0.0)
+    glVertex3f(-1.0,1.0,0.0)
     glEnd()
 
     # Dibujar un triangulo y aparte esta alrevez para no hacer dos cosas

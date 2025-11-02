@@ -15,7 +15,7 @@ def display():
     glLoadIdentity()
     glTranslatef(0.0, 0.0, -50)  # Mover la cámara hacia atrás
 
-    # Dibujar un triángulo
+    # Dibujar un Cuadrado
     glBegin(GL_QUADS)
     glColor3f(1.0, 0.0, 0.0)  # Rojo
     glVertex3f(-1.0, -1.0, 0.0)

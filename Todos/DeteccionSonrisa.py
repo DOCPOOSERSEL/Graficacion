@@ -11,7 +11,7 @@ face_mesh = mp_face_mesh.FaceMesh(static_image_mode=False, max_num_faces=2,
 cap = cv2.VideoCapture(0)
 
 # Lista de índices de landmarks específicos (ojos y boca)
-selected_points = [ 291, 17, 0]  # Ojos y boca
+selected_points = [61, 291, 17, 0]  # Ojos y boca
 
 def distancia(p1, p2):
     """Calcula la distancia euclidiana entre dos puntos."""
@@ -36,8 +36,9 @@ while cap.isOpened():
                 puntos[idx] = (x, y)
                 cv2.circle(frame, (x, y), 2, (0, 255, 0), -1)  # Dibuja el punto en verde
 
-            #if 61 in puntos and 0 in puntos:
-                #d_boca = distancia(puntos[291], puntos[61])
+            if 61 in puntos and 291 in puntos:
+                d_boca_horizontal = distancia(puntos[291], puntos[61])
+                d_boca_vertical = distancia(puntos[17],puntos[0])
                 
 
     cv2.imshow('PuntosFacialesMediaPipe', frame)
