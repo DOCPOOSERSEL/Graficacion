@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import math
 
 # Tamaño de la imagen
 alto, ancho = 600, 600
