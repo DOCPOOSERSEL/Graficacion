@@ -8,6 +8,9 @@ cap = cv2.VideoCapture(0)
 ret, frame = cap.read()
 canvas = np.zeros_like(frame)
 
+# Nueva variable para determinar que tipo de figura se dibuja
+tipoFigura = 0
+
 
 # Rango de color rojo en HSV
 lower_red1 = np.array([0, 100, 100])
@@ -47,6 +50,22 @@ def Cambio_de_color(Coordenadas):
     if 0 <= indice_cuadro < len(colores): #Len es lenght del largo del arreglo
         return colores[indice_cuadro]
     return None
+
+def dibujo_sobre_canvas(canvas,prev_center,center,color,tamaño,tipoFigura):
+    if tipoFigura == 0:
+        # Línea entre el punto anterior y el actual
+        cv2.line(canvas, prev_center, center, color, tamaño)
+
+    elif tipoFigura == 1:
+        # Círculo en la posición actual (tamaño = radio)
+        cv2.circle(canvas, center, tamaño, color, -1)
+
+    elif tipoFigura == 2:
+        # Cuadro entre el punto anterior y el actual
+        x1, y1 = prev_center
+        x2, y2 = center
+        cv2.rectangle(canvas, (x1, y1), (x2, y2), color, tamaño)
+
 
 while True:
     ret, frame = cap.read()
@@ -88,7 +107,8 @@ while True:
             if 0<= cy <= 60:
                 color = Cambio_de_color(center)
             else:
-                cv2.line(canvas, prev_center, center, color , 5)
+                dibujo_sobre_canvas(canvas,prev_center,center,color,5,tipoFigura)
+                # cv2.line(canvas, prev_center, center, color , 5)
         
         prev_center = center
     else:
@@ -113,6 +133,13 @@ while True:
         break
     elif key == ord('c'):  # 'c' para limpiar el lienzo
         canvas = np.zeros_like(frame)
+    elif key == ord('q'):
+        tipoFigura = 0
+    elif key == ord('a'):
+        tipoFigura = 1
+    elif key == ord('z'):    
+        tipoFigura = 2
+
 
 cap.release()
 cv2.destroyAllWindows()
