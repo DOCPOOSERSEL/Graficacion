@@ -11,7 +11,7 @@ t = np.linspace(0, 2*np.pi, 500)
 def ecuaciones(t):
     curvas = []
     # Cada curva se ajusta 
-    curvas.append( (np.cos(t)*100 + 300, np.sin(t)*100 + 300) )   # 1. Círculo
+    curvas.append( (np.cos(t)*100 + 300, np.sin(t)*100 + 300) )   # 1. Círculod
     curvas.append( (2*np.cos(t)*50 + 300, np.sin(t)*100 + 300) )  # 2. Elipse
     curvas.append( (np.cos(t)/(1+np.sin(t)**2)*150 + 300, np.cos(t)*np.sin(t)/(1+np.sin(t)**2)*150 + 300) ) # 3. Lemniscata
     curvas.append( (np.sin(2*t)*100 + 300, np.sin(3*t)*100 + 300) ) # 4. Hipocicloide simple

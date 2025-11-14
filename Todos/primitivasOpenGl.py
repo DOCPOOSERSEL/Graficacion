@@ -19,27 +19,21 @@ def display():
     glLoadIdentity()
     glTranslatef(0.0, 0.0, -15)  # alejar cámara para ver todo
 
-    # --------------------------
-    # TOROIDE (arriba izquierda)
-    # --------------------------
+    # toroide
     glPushMatrix()
     glTranslatef(-4.0, 3.0, 0.0)
     glColor3f(1.0, 0.0, 0.0)
     glutWireTorus(0.5, 1.5, 20, 20)
     glPopMatrix()
 
-    # --------------------------
-    # CUBO (arriba derecha)
-    # --------------------------
+    #Cubo
     glPushMatrix()
     glTranslatef(4.0, 3.0, 0.0)
     glColor3f(0.0, 1.0, 0.0)
     glutWireCube(3)
     glPopMatrix()
 
-    # --------------------------
-    # CONO (abajo izquierda)
-    # --------------------------
+    # Cono
     glPushMatrix()
     glTranslatef(-4.0, -3.0, 0.0)
     glRotatef(-90, 1, 0, 0)
@@ -47,9 +41,7 @@ def display():
     glutWireCone(1.5, 3.0, 20, 20)
     glPopMatrix()
 
-    # --------------------------
-    # ESFERA (abajo derecha)
-    # --------------------------
+    # Esfera
     glPushMatrix()
     glTranslatef(4.0, -3.0, 0.0)
     glColor3f(1.0, 1.0, 0.0)
